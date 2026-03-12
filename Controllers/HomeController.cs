@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using stidnetdemoapp2.Models;
 
 namespace stidnetdemoapp2.Controllers;
@@ -9,23 +10,17 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IConfiguration _config;
 
-    public HomeController(ILogger<HomeController> logger, IConfiguration config)
+    public HomeController(ILogger<HomeController> logger, IOptions<AppSettings> options)
     {
-    _logger = logger;
-    _config = config;
+        _logger = logger;
+        _settings = options.Value;
     }
-
+    
     public IActionResult Index()
     {
-        var settings = new AppSettings
-        {
-            SiteName = _config["AppSettings:SiteName"],
-            MaxItems = _config.GetValue<int>("AppSettings:MaxItems")
-        };
-    
-        return View(settings);
+        return View(_settings);
     }
-
+    
     public IActionResult Privacy()
     {
         return View();
@@ -37,4 +32,5 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+
 
