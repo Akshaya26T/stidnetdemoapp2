@@ -47,11 +47,31 @@ stages:
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: $(artifactName)
 
-- stage: Deploy
+- stage: Deploy2Dev
   displayName: 'Deploy to Azure Web App'
   dependsOn: Build
   jobs:
-  - deployment: DeployWeb
+  - deployment: DeployWeb2Dev
+    environment: 'development'  # or create an environment name you prefer
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: $(artifactName)
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(webAppName)
+              package: '$(Pipeline.Workspace)/$(artifactName)/*.zip'
+
+- stage: Deploy2Prod
+  displayName: 'Deploy to Azure Web App'
+  dependsOn: Build
+  jobs:
+  - deployment: DeployWeb2Prod
     environment: 'production'  # or create an environment name you prefer
     strategy:
       runOnce:
