@@ -8,8 +8,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  azureSubscription: '<Your-Service-Connection-Name>'  # Replace with your Azure Service Connection name
-  webAppName: '<Your-App-Service-Name>'                # Replace with your web app name
+  azureSubscription: 'Azure Subscription 1(ac75e7f3-86b0-4143-9794-ea30c388af3d)'  # Replace with your Azure Service Connection name
+  webAppName: 'app1web'                # Replace with your web app name
   artifactName: 'drop'
 
 stages:
