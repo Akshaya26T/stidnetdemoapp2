@@ -7,15 +7,23 @@ namespace stidnetdemoapp2.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IConfiguration _config;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IConfiguration config)
     {
-        _logger = logger;
+    _logger = logger;
+    _config = config;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var settings = new AppSettings
+        {
+            SiteName = _config["AppSettings:SiteName"],
+            MaxItems = _config.GetValue<int>("AppSettings:MaxItems")
+        };
+    
+        return View(settings);
     }
 
     public IActionResult Privacy()
@@ -29,3 +37,4 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+
