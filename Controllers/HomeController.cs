@@ -8,7 +8,7 @@ namespace stidnetdemoapp2.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IConfiguration _config;
+    private readonly AppSettings _settings;
 
     public HomeController(ILogger<HomeController> logger, IOptions<AppSettings> options)
     {
@@ -32,5 +32,6 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+
 
 
