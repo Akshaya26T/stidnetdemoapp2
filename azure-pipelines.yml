@@ -1,4 +1,5 @@
 trigger:
+
   branches:
     include:
       - main   # Change this if your default branch is different
@@ -10,6 +11,7 @@ variables:
   buildConfiguration: 'Release'
   azureSubscription: 'Azure Subscription 1(ac75e7f3-86b0-4143-9794-ea30c388af3d)'  # Replace with your Azure Service Connection name
   webAppName: 'app1web'                # Replace with your web app name
+  webAppNameDev: 'app1devweb'
   artifactName: 'drop'
 
 stages:
@@ -59,12 +61,11 @@ stages:
           steps:
           - download: current
             artifact: $(artifactName)
-
           - task: AzureWebApp@1
             displayName: 'Deploy to Azure App Service'
             inputs:
               azureSubscription: $(azureSubscription)
-              appName: $(webAppName)
+              appName: $(webAppNameDev)
               package: '$(Pipeline.Workspace)/$(artifactName)/*.zip'
 
 - stage: Deploy2Prod
