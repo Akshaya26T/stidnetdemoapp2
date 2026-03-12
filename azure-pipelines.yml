@@ -70,7 +70,7 @@ stages:
 
 - stage: Deploy2Prod
   displayName: 'Deploy to Azure Web App'
-  dependsOn: Build
+  dependsOn: Deploy2Dev
   jobs:
   - deployment: DeployWeb2Prod
     environment: 'production'  # or create an environment name you prefer
