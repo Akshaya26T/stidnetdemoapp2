@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -20,9 +21,9 @@ steps:
 - task: AzureRmWebAppDeployment@5
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(2)(ac75e7f3-86b0-4143-9794-ea30c388af3d)'
+    azureSubscription: 'Azure subscription 1(3)(ac75e7f3-86b0-4143-9794-ea30c388af3d)'
     appType: 'webAppLinux'
     WebAppName: 'app1web'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     RuntimeStack: 'NODE|22-lts'
-    DeploymentTypeLinux: 'oneDeploy'
+    DeploymentTypeLinux: 'zipDeploy'
