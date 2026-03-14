@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Connect to Key Vault using Managed Identity
 var keyVaultUrl = new Uri(builder.Configuration["KeyVaultUrl"]);
 builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-builder.Services.AddControllersWithViews();
+// DEBUG TEST
+Console.WriteLine("KeyVault HostName = " + builder.Configuration["AppSettings:HostName"]);
+//builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+//builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -34,6 +36,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-
-
