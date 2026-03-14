@@ -5,7 +5,7 @@ trigger:
       - main   # Change this if your default branch is different
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
